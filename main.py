@@ -15,8 +15,13 @@ TIMEOUT = 30
 
 
 def main():
+    if len(sys.argv) != 3:
+        print("Usage:")
+        print("python main.py [personal-id] [download-excel: 0/1]")
+        sys.exit(0)
 
     personal_id = sys.argv[1]
+    download_excel = sys.argv[2]
 
     chrome_options = Options()
     chrome_options.add_experimental_option("detach", True)
@@ -50,15 +55,23 @@ def main():
 
     # <a href="/mvk/services.xhtml?tab=1#tabs-1" class="itemNavigation assistiveText">Gå till Journal</a>
     #journal_arrow = find_elements_by_xpath("//a[@class='itemNavigation assistiveText' and text()='Gå till Journal']", 120)
-    journal_arrow = find_elements_by_xpath(driver, "//h4[text()='Journaltjänster']", 120)
+    journal_arrow = find_elements_by_xpath(driver, "//h4[text()='Journaltjänster']", 180)
     journal_arrow.click()
 
     # <a href="https://journalen.1177.se?hsaid=SE162321000024-1177&amp;dynamicid=KONT-9DZFUX" class="itemNavigation assistiveText">Gå till tjänsten Journalen</a>
     journalen_arrow = find_elements_by_xpath(driver, "//a[@class='itemNavigation assistiveText' and text()='Gå till tjänsten Journalen']", TIMEOUT)
     journalen_arrow.click()
 
-    view_all_button = find_elements_by_xpath(driver, "//button[@id='btnShowRespite and text()='Visa alla uppgifter'", TIMEOUT)
+    view_all_button = find_elements_by_xpath(driver, "//button[@id='btnShowRespite' and text()='Visa alla uppgifter']", TIMEOUT)
     view_all_button.click()
+
+    provsvar = find_elements_by_xpath(driver, "//div[@class='journal-category-item' and @data-configurable-module=8]", TIMEOUT)
+    provsvar.click()
+
+    if download_excel == 1:
+        export_to_excel = find_elements_by_xpath(driver, "//a[@id='export-to-excel']", TIMEOUT)
+        export_to_excel.click()
+
     # driver.close()
 
 
