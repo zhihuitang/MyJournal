@@ -68,7 +68,7 @@ def main():
     provsvar = find_elements_by_xpath(driver, "//div[@class='journal-category-item' and @data-configurable-module=8]", TIMEOUT)
     provsvar.click()
 
-    if download_excel == 1:
+    if download_excel == "1":
         export_to_excel = find_elements_by_xpath(driver, "//a[@id='export-to-excel']", TIMEOUT)
         export_to_excel.click()
 
