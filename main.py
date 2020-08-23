@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 import sys
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
@@ -33,7 +36,7 @@ def main():
     chrome_options.add_experimental_option("prefs", prefs)
 
     # driver = webdriver.Firefox()
-    driver = webdriver.Chrome(options=chrome_options)
+    driver = webdriver.Chrome(executable_path="./chromedriver", options=chrome_options)
     driver.get("https://www.1177.se/Stockholm/")
 
     assert "1177" in driver.title
